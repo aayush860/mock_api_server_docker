@@ -69,7 +69,7 @@ def create_campaigns():
     recipient_list_ids = [rl.recipient_category for rl in RecipientList.query.all()]
     template_ids = [et.name for et in EmailTemplate.query.all()]
     campaigns = [
-        Campaign(name='Admin_camp', send_time=datetime.utcnow() + timedelta(hours=5),recipient_category=recipient_list_ids[0],
+        Campaign(name='Admin_camp', send_time=datetime.utcnow() + timedelta(hours=5), recipient_category=recipient_list_ids[0],
                  template_name=template_ids[0], campaign_template="Hello Admins How are You", status='Scheduled'),
         Campaign(name='Vendor_camp', send_time=datetime.utcnow() + timedelta(hours=10), recipient_category=recipient_list_ids[1],
                  template_name=template_ids[1], campaign_template="Hello Vendors How are You", status='Scheduled'),
