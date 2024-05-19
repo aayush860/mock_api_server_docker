@@ -1,0 +1,11 @@
+version: '3'
+services:
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=sqlite:///mydatabase.db  # Change the database URL to SQLite
+  db:
+    # No need for a separate database container since SQLite is file-based
+    # Remove the db service definition
