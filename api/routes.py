@@ -73,7 +73,7 @@ def create_recipient():
 
 @api_bp.route('/api/recipient_lists', methods=['POST'])
 def create_recipient_list():
-    data = request.jso
+    data = request.json
     if not data or 'recipient_category' not in data or not data['recipient_category']:
         return jsonify({'error': 'Invalid input', 'message': 'recipient_category is required and cannot be null.'}), 400
     recipient_category = data['recipient_category']
