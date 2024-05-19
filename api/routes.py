@@ -150,7 +150,10 @@ def update_campaign_by_name(name):
     # Update other fields if provided
     if 'name' in data:
         campaign.name = data['name']
+
     if 'campaign_template' in data:
+        if data['campaign_template'] == "":
+            return jsonify({'error': 'Campaign Template cannot be Null'}), 404
         campaign.campaign_template = data['campaign_template']
 
     db.session.commit()
@@ -188,8 +191,23 @@ def partial_update_campaign_by_name(name):
             return jsonify({'error': 'Email template not found'}), 404
         campaign.template_name = template_name
     if 'campaign_template' in data:
+        if data['campaign_template'] == "":
+            return jsonify({'error': 'Campaign Template cannot be Null'}), 404
         campaign.campaign_template = data['campaign_template']
 
     db.session.commit()
 
     return jsonify(campaign.serialize()), 200
+
+
+@api_bp.route('/api/campaigns/<status>', methods=['GET'])
+def get_campaigns_by_status(status):
+    # Assuming Campaign model exists with a 'status' field
+
+    # Retrieve campaigns based on status
+    campaigns = Campaign.query.filter_by(status=status).all()
+
+    # Serialize the campaigns
+    serialized_campaigns = [campaign.serialize() for campaign in campaigns]
+
+    return jsonify(serialized_campaigns), 200

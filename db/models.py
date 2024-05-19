@@ -25,7 +25,7 @@ class Recipient(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     email = Column(String, unique=True, nullable=False)
     name = Column(String)
-    recipient_category = Column(String)
+    recipient_category = Column(String, nullable=False)
 
     def serialize(self):
         return {
@@ -58,8 +58,8 @@ class Campaign(db.Model):
     name = Column(String, nullable=False, unique=True)
     send_time = Column(DateTime, nullable=False)
     campaign_template = Column(String, nullable=False)
-    recipient_category = Column(String, ForeignKey('recipient_lists.recipient_category'))
-    template_name = Column(String, ForeignKey('email_templates.name'))
+    recipient_category = Column(String, ForeignKey('recipient_lists.recipient_category'), nullable=False)
+    template_name = Column(String, ForeignKey('email_templates.name'), nullable=False)
     status = Column(String, default='Scheduled')
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
