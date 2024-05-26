@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 services:
   api:
     build: .
@@ -6,6 +6,4 @@ services:
       - "5000:5000"
     environment:
       - DATABASE_URL=sqlite:///mydatabase.db  # Change the database URL to SQLite
-  db:
-    # No need for a separate database container since SQLite is file-based
-    # Remove the db service definition
+
